@@ -1,4 +1,5 @@
 const express = require('express');
+const server = require('../users/users-router');
 
 const router = express.Router();
 
@@ -22,3 +23,4 @@ router.put('/:id', (req, res) => {
 });
 
 // do not forget to export the router
+module.exports = server
