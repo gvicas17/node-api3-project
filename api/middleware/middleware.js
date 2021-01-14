@@ -30,8 +30,19 @@ function validateUser(req, res, next) {
   }
 }
 
-function validatePostId(req, res, next) {
+async function validatePostId(req, res, next) {
   // do your magic!
+  try{
+    const post = await Posts.getById(req.params.id)
+    if(post){
+      req.post = post
+      next()
+    }else{
+      res.status(404).json('post not found')
+    }
+    }catch(error){
+      res.status(500).json(error)
+  }
 }
 
 function validatePost(req, res, next) {
@@ -48,4 +59,4 @@ function validatePost(req, res, next) {
 
 
 // do not forget to expose these functions to other modules
-module.exports = {validateUserId, validateUser,  validatePost}
+module.exports = {validateUserId, validateUser,  validatePost, validatePostId}

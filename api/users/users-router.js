@@ -6,9 +6,16 @@ const {validateUserId, validateUser, validatePost} = require('../middleware/midd
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
+router.post('/', validateUser, (req, res) => {
   // do your magic!
   // this needs a middleware to check that the request body is valid
+  Users.insert(req.body)
+  .then(user => {
+    res.status(200).json({message: 'user successfully created'})
+  })
+  .catch(err => {
+    res.status(500).json({message: 'error creating new user'})
+  })
 });
 
 router.get('/', (req, res, next) => {
@@ -59,10 +66,10 @@ router.post('/:id/posts', validateUserId,  (req, res) => {
   // and another middleware to check that the request body is valid
   Users.insert(req.body)
   .then(user => {
-    res.status(200).json({message: 'user succesfully added'})
+    res.status(200).json({message: 'user post succesfully added'})
   })
   .catch(err => {
-    res.status(500).json({message: 'error adding user'})
+    res.status(500).json({message: 'error adding user post'})
   })
 });
 
