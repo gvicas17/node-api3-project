@@ -1,5 +1,4 @@
 const express = require('express');
-const server = require('../users/users-router');
 const Posts = require('./posts-model')
 const router = express.Router();
 const {validatePostId} = require('../middleware/middleware')
@@ -11,7 +10,7 @@ router.get('/', (req, res) => {
     res.status(200).json(posts)
   })
   .catch(err => {
-    res.status(500).jston({message: 'unable to load posts'})
+    res.status(500).json({message: 'unable to load posts'})
   })
 });
 
@@ -53,4 +52,4 @@ router.put('/:id', validatePostId, (req, res) => {
 });
 
 // do not forget to export the router
-module.exports = server
+module.exports = router

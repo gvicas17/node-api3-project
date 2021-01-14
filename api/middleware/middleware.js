@@ -1,8 +1,12 @@
 const Users = require('../users/users-model')
 const Posts = require('../posts/posts-model')
 
-function logger(req, res, next) {
+function logger({method, baseURL, url}, req, res, next) {
   // do your magic!
+  console.log('REQ METHOD:', method)
+  console.log('REQ URL:', 'http://localhost:4000', baseURL, url)
+  console.log('REQ TIMESTAMP:', new Date())
+  next()
 }
 
 async function validateUserId(req, res, next) {
@@ -59,4 +63,4 @@ function validatePost(req, res, next) {
 
 
 // do not forget to expose these functions to other modules
-module.exports = {validateUserId, validateUser,  validatePost, validatePostId}
+module.exports = {validateUserId, validateUser,  validatePost, validatePostId, logger}

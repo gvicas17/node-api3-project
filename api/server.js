@@ -1,10 +1,10 @@
 const express = require('express');
 const usersRouter = require('./users/users-router')
 const postsRouter = require('./posts/posts-router')
-
+const {logger} = require('./middleware/middleware')
 const server = express();
 
-server.use(express.json())
+server.use(logger) //should be (logger)
 server.use('/api/users', usersRouter)
 server.use('/api/posts', postsRouter)
 // server.use('/api/posts', postsRouter)
